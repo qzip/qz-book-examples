@@ -14,5 +14,5 @@ require (
 
 replace (
 	merkle => ../merkle
-	qz => ../qz
+	qz => ../../quartz
 )
