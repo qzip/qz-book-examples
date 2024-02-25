@@ -3,7 +3,7 @@ package erp
 import "time"
 
 // DocDef is a struct that is inspired by the DocDef in ERPNext
-// It connects a JSON schema to a set of templates and rules
+// It connects a schema to a set of templates and rules
 // The schema, templates and rules are looked up from the registry.
 type DocDefCfg struct {
 	Name       string `json:"name"`
