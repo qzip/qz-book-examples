@@ -13,6 +13,6 @@ require (
 )
 
 replace (
-	merkle => ../merkle
+	merkle => ../../quartz/merkle
 	qz => ../../quartz/qz
 )

@@ -1,7 +1,6 @@
-module doltdb
+module erp
 
-go 1.21.6
-
+go 1.20
 require {
 	qz v0.0.0
 )

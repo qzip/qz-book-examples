@@ -17,6 +17,6 @@ require (
 )
 
 replace (
-	merkle => ../ondc-server/merkle
-	qz => ../ondc-server/qz
+	merkle => ../../quartz/merkle
+	qz => ../../quartz/qz
 )
