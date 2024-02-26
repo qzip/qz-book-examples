@@ -6,16 +6,16 @@ import "time"
 // It connects a schema to a set of templates and rules
 // The schema, templates and rules are looked up from the registry.
 type DocDefCfg struct {
-	Name       string `json:"name"`
-	Schema     string `json:"schema"`
-	Template   string `json:"template"`
-	Rule       string `json:"rule"`
-	DataAccess string `json:"dataAccess"`
+	Name            string `json:"name"`
+	SchemaValidator string `json:"schema"`
+	Template        string `json:"template"`
+	Rule            string `json:"rule"`
+	DataAccess      string `json:"dataAccess"`
 }
 type DocDef struct {
 	Name     string
 	rule     Rule
-	schema   Schema
+	schema   SchemaValidator // see l2algo/regschema.go
 	template Template
 }
 
@@ -24,9 +24,8 @@ type Rule interface {
 }
 
 // Schema can be a JSON schema or ErpNext DocType schema or Ofbiz Entity schema
-type Schema interface {
-	Validate(data interface{}) error
-	GetSchema() []byte
+type SchemaValidator interface {
+	Validate(schema, json []byte) error
 }
 
 type Template interface{}

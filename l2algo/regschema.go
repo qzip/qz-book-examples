@@ -15,7 +15,7 @@ type GenMerkleProofs interface {
 }
 
 type SchemaFactory interface {
-	Schema() string // registry
+	Name() string // registry
 	Help() string
 	ComponentType() reflect.Type
 	//	Create(ctx context.Context, cfg map[string]interface{}, errChan chan error) (component interface{})
@@ -27,7 +27,7 @@ var regSchemaFactory = make(map[string]SchemaFactory)
 
 // RegisterSchemaFactory register a component factory
 func RegisterSchemaFactory(cfact SchemaFactory) {
-	regSchemaFactory[cfact.Schema()] = cfact
+	regSchemaFactory[cfact.Name()] = cfact
 }
 
 // LookUpSchemaFactory gets command from registry
