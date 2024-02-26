@@ -5,4 +5,5 @@ use (
 	./fbjwt
 	./ondc
 	./erp
+	./l2algo
 )

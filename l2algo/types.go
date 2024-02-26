@@ -17,7 +17,7 @@ type AlgoCommitment struct {
 }
 
 // Hash implements merkle.Hasher interface
-// computes merkle root of the BxnBlock param
+// computes merkle root of the TxnBlock param
 func (ac *AlgoCommitment) Hash() []byte {
 	return merkle.SimpleHashFromMap(ac.MerkleHasher())
 
@@ -28,7 +28,9 @@ func (ac *AlgoCommitment) MerkleHasher() map[string]merkle.Hasher {
 
 	m["schema"] = cas.HashedData(cas.Hash([]byte(ac.Schema)))
 	m["namespace"] = cas.HashedData(cas.Hash([]byte(ac.Namespace)))
-	m["sequence"] = cas.HashedData(cas.IntHasher(ac.Sequence))
+	if ac.Sequence > 0 {
+		m["sequence"] = cas.HashedData(cas.IntHasher(ac.Sequence))
+	}
 	if len(ac.State) > 0 {
 		m["state"] = cas.HashedData(cas.Hash([]byte(ac.State)))
 	}
