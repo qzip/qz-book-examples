@@ -25,8 +25,9 @@ const (
 type EntityType string
 
 const (
-	ETfarm    = "Farm"
-	ETharvest = "Harvest"
+	ETfarm    = "farm"
+	ETharvest = "harvest"
+	ETParty   = "party"
 )
 
 type Farm struct {
@@ -49,23 +50,27 @@ type DocTrace struct {
 }
 
 type Harvest struct {
-	ID       W3Cdid            `json:"id"`
+	ID          W3Cdid    `json:"id"`
 	FarmRef     Hash      `json:"farmref"`
 	HarvestDate time.Time `json:"tmharvest"`
 	Produce     URI       `json:"produce"`
 	WeightGm    int64     `json:"gmwt"`
-	HarvestedBy URI		  `json:"harvestedby"'
+	HarvestedBy W3Cdid    `json:"harvestedby"`
 }
 
 type DocLink struct {
-	DocHash    Hash              `json:"dochash"`
-	EntityHash Hash              `json:"entity"`
-	Entity     EntityType        `json:"type"`
-	Metadata   map[string]string `json:"metadata,omitempty"`
+	DocID    W3Cdid            `json:"docId"`
+	EntityID W3Cdid            `json:"entityId"`
+	Entity   EntityType        `json:"type"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
 type Transfer struct {
-	Seller URI `json:"seller"`
-	Buyer  URI `json:"buyer"`
-
+	Seller     W3Cdid            `json:"seller"`
+	Buyer      W3Cdid            `json:"buyer"`
+	Harvest    W3Cdid            `json:"harvest"`
+	Invoice    W3Cdid            `json:"invoice"`
+	WeightGm   int64             `json:"gmwt"`
+	TmTransfer time.Time         `json:"tmTransfer"`
+	Metadata   map[string]string `json:"metadata,omitempty"`
 }
