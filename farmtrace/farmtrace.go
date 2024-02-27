@@ -37,6 +37,9 @@ type Farm struct {
 }
 
 type URI string
+
+// W3Cdid did:qz:<namespace>#<Hash base32>
+// did:qz:example.com#AFB123456ZX
 type W3Cdid string
 type Hash []byte
 
