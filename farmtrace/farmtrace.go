@@ -5,7 +5,7 @@ import "time"
 type FarmPractice string
 
 const (
-	Standard FarmPractice = "standard"
+	Standard FarmPractice = "chemical"
 	Organic  FarmPractice = "organic"
 )
 
@@ -36,22 +36,25 @@ type Farm struct {
 }
 
 type URI string
+type W3Cdid string
 type Hash []byte
 
 type DocTrace struct {
+	ID       W3Cdid            `json:"id"`
 	DocHash  Hash              `json:"dochash"`
 	Schema   URI               `json:"uri"`
-	W3CDID   URI               `json:"w3cdid"`
 	Metadata map[string]string `json:"metadata,omitempty"`
 	IsPublic bool              `json:"ispublic"`
 	Format   DocFormat         `json:"format"`
 }
 
 type Harvest struct {
+	ID       W3Cdid            `json:"id"`
 	FarmRef     Hash      `json:"farmref"`
 	HarvestDate time.Time `json:"tmharvest"`
 	Produce     URI       `json:"produce"`
 	WeightGm    int64     `json:"gmwt"`
+	HarvestedBy URI		  `json:"harvestedby"'
 }
 
 type DocLink struct {
@@ -59,4 +62,10 @@ type DocLink struct {
 	EntityHash Hash              `json:"entity"`
 	Entity     EntityType        `json:"type"`
 	Metadata   map[string]string `json:"metadata,omitempty"`
+}
+
+type Transfer struct {
+	Seller URI `json:"seller"`
+	Buyer  URI `json:"buyer"`
+
 }
