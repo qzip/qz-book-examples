@@ -42,8 +42,6 @@ func (a *Account) ValidateParent() error {
 		par := GetAccount(a.ParentAccount)
 		if par == nil {
 			return errors.New(fmt.Sprintf("Account %s: Parent account %s does not exist", a.Name, a.ParentAccount))
-		} else if par.Name == a.Name {
-			return errors.New(fmt.Sprintf("Account %s: You can not assign itself as parent account", a.Name))
 		} else if !par.IsGroup {
 			return errors.New(fmt.Sprintf("Account %s: Parent account %s can not be a ledger", a.Name, a.ParentAccount))
 		} else if par.Company != a.Company {
@@ -89,5 +87,3 @@ func main() {
 		fmt.Println(err)
 	}
 }
-
-
