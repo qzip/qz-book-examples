@@ -1,6 +1,6 @@
 CREATE TABLE `cas` (
   `w3cdid` varchar(512) NOT NULL,
-  `namespace` varchar(512) DEFAULT ('com.aloagri.harvest2invoice'),
+  `namespace` varchar(512) DEFAULT ('one.vyapar.cas'),
   `cas_data` json,
   `tmstamp` timestamp,
   PRIMARY KEY (`w3cdid`)
