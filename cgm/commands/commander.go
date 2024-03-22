@@ -16,14 +16,21 @@ type Command struct {
 
 type ExecFunc func(param interface{}) error
 
-type Commands struct {
-	name string
+type commandFunc struct {
 	exec ExecFunc
+	help string
+}
+
+var registry := make(map[string]*commandFunc)
+
+func RegisterCommand(name string, exec ExecFunc, help string) {
+	var cf = &commandFunc{ exec: exec, help: help}
+	registry[name] = cf
 }
 
 func (cmd *Commander) Run(param *Command) error {
-	if fx, ok := Commands[param.Command]; ok {
-		return fx(param.Param)
+	if fx, ok := registry[param.Command]; ok {
+		return fx.exec(param.Param)
 	}
 	return fmt.Errorf("command %v not found", param.Command)
 }
