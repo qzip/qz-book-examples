@@ -21,10 +21,10 @@ type commandFunc struct {
 	help string
 }
 
-var registry := make(map[string]*commandFunc)
+var registry = make(map[string]*commandFunc)
 
 func RegisterCommand(name string, exec ExecFunc, help string) {
-	var cf = &commandFunc{ exec: exec, help: help}
+	var cf = &commandFunc{exec: exec, help: help}
 	registry[name] = cf
 }
 
