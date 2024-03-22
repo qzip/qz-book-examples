@@ -9,4 +9,5 @@ use (
 	./fbjwt
 	./l2algo
 	./ondc
+	./cgm
 )
