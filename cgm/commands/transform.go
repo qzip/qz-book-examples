@@ -70,7 +70,6 @@ func (cd *CSV2DbParam) Process() error {
 	rd := bufio.NewReader(fileIn)
 	i := 1
 	for {
-
 		ln, err := rd.ReadString('\n')
 		if err != nil && err != io.EOF {
 			return err
@@ -89,9 +88,9 @@ func (cd *CSV2DbParam) Process() error {
 					return err
 				}
 			}
-			i++
 
 		}
+		i++
 	}
 
 	return nil
