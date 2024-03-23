@@ -18,7 +18,7 @@ func init() {
 
 type CSV2DbParam struct {
 	CSVfile string `json:"csvFile"`
-	DbPath  string `json:"inFileName"`
+	DbPath  string `json:"dbPath"`
 	UserId  string `json:"userid"`
 }
 
