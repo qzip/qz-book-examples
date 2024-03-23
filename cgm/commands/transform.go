@@ -112,6 +112,9 @@ CREATE INDEX "uid" ON "cgm" (
 	"userid"	ASC
 )
 
+The CSV file is assumed as having 2 column :
+ 1st row headers
+ 2nd row onwards: datetime, cgm values mg/DL
 
 
 `
