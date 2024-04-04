@@ -37,7 +37,7 @@ func (cmd *Commander) Run(param *Command) error {
 
 func (cmd *Commander) RunFile(cmfFile string) error {
 	cfg := &Command{}
-	jsonb, err := os.ReadFile(fname)
+	jsonb, err := os.ReadFile(cmfFile)
 	if err != nil {
 		return err
 	}
