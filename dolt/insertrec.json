@@ -1,0 +1,8 @@
+{
+	"dbConnection": "root:@tcp(127.0.0.1:3306)/dolt-data",
+	"data": {
+		"device": "af123",
+		"reading": 231
+	}
+	
+}
