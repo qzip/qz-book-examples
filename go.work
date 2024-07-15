@@ -8,4 +8,6 @@ use (
 	./fbjwt
 	./l2algo
 	./ondc
+	./erp/goxml2json
+	./erp/x2j
 )
