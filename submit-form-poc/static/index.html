@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .form-group button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        #imagePreview {
+            width: 100%;
+            max-width: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Product Input Form</h2>
+        <form id="productForm">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="productDescription">Description</label>
+                <textarea id="productDescription" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="productSKU">SKU</label>
+                <input type="text" id="productSKU" name="sku" required>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Price</label>
+                <input type="number" id="productPrice" name="price" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="productCurrency">Currency</label>
+                <select id="productCurrency" name="priceCurrency" required>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="productBrand">Brand</label>
+                <input type="text" id="productBrand" name="brand">
+            </div>
+            <div class="form-group">
+                <label for="productCategory">Category</label>
+                <input type="text" id="productCategory" name="category">
+            </div>
+            <div class="form-group">
+                <label for="productImage">Image URL</label>
+                <input type="url" id="productImage" name="image">
+            </div>
+            <div class="form-group">
+                <label for="uploadImage">Upload Image</label>
+                <input type="file" id="uploadImage" accept="image/*">
+                <img id="imagePreview" src="" alt="Image Preview">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="submitForm()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('uploadImage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('productImage').value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function submitForm() {
+            const form = document.getElementById('productForm');
+            const formData = new FormData(form);
+            const jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            fetch('http://localhost:8080/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => {
+                if (response.status === 201) {
+                    alert('Product created successfully');
+                } else {
+                    response.text().then(text => { alert('Error: ' + text); });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
